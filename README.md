@@ -76,13 +76,21 @@ The database is built on **PostgreSQL via Supabase** and strictly adheres to Thi
 
 ---
 
+## Documentation & Resources
+
+* **Presentation Deck:** [View Slides (PDF)](docs/presentation.pdf)
+* **ER & Architecture Diagrams:** Available in the [`docs/`](docs/) directory.
+
+---
+
 ## Project Structure
 
 ```text
 onlygames/
 ├── docs/
 │   ├── er-diagram.png
-│   └── relational-schema.png
+│   ├── relational-schema.png
+│   └── presentation.pdf
 ├── sql/
 │   ├── schema.sql
 │   └── queries.sql
