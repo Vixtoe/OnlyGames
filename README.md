@@ -76,6 +76,17 @@ The database is built on **PostgreSQL via Supabase** and strictly adheres to Thi
 
 ---
 
+## Team & Individual Contributions
+
+* **Academic Course:** CN392 / Database Systems at Thammasat School of Engineering
+* **Team Members:** [Member Name 1], [Member Name 2], Chanoudom Tann (Victor), [Member Name 4]
+* **My Individual Role & Contributions:**
+  * Designed and normalized the relational database schema to 3NF (`UserLibrary`, `Trades`, and `Orders` separation).
+  * Authored SQL DDL scripts, constraints, and key analytical queries on Supabase/PostgreSQL.
+  * Developed documentation and presentation structure.
+
+---
+
 ## Documentation & Resources
 
 * **Presentation Deck:** [View Slides (PDF)](docs/presentation.pdf)
