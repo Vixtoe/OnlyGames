@@ -90,7 +90,6 @@ The database is built on **PostgreSQL via Supabase** and strictly adheres to Thi
 ## Documentation & Resources
 
 * **Presentation Deck:** [View Slides (PDF)](OnlyGames.pdf)
-* **ER & Architecture Diagrams:** Available in the [`docs/`](docs/) directory.
 
 ---
 
