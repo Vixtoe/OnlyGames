@@ -27,8 +27,8 @@ This was a university database course project.
 
 ## ER Diagram
 
-```mermaid
 erDiagram
+    auth_users ||--|| profiles : "extends"
     profiles ||--o{ orders : places
     profiles ||--o{ reviews : writes
     profiles ||--o{ user_library : owns
@@ -36,7 +36,7 @@ erDiagram
     profiles ||--o{ wishlists : saves
     profiles ||--|| wallets : has
     profiles ||--o{ friends : "user_id1 / user_id2"
-    profiles ||--o{ trades : "sender / receiver"
+    profiles ||--o{ trades : "sender_id / receiver_id"
     orders ||--o{ order_details : contains
     games ||--o{ order_details : "ordered in"
     games ||--o{ reviews : receives
@@ -47,11 +47,10 @@ erDiagram
     games ||--o{ system_requirements : requires
     games ||--o{ game_tags : tagged
     tags ||--o{ game_tags : labels
-    games ||--o{ trades : "offered / requested"
+    games ||--o{ trades : "offered_game / requested_game"
     categories ||--o{ games : groups
     developers ||--o{ games : develops
     publishers ||--o{ games : publishes
-```
 ---
 
 ## Key System Features
