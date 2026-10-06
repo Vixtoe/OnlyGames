@@ -27,6 +27,7 @@ This was a university database course project.
 
 ## ER Diagram
 
+```mermaid
 erDiagram
     auth_users ||--|| profiles : "extends"
     profiles ||--o{ orders : places
