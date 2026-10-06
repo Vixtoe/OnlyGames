@@ -28,7 +28,7 @@ The relational schema is hosted on **Supabase** with strict foreign key cascadin
   <img src="./assets/er_diagram_detail.png" width="52%" alt="ER Diagram Detailed View" />
 </p>
 
-* **Supabase Backend Link**: [Access Supabase Dashboard / Project API](https://supabase.com)
+* **Supabase Backend Link**: [Access Supabase Dashboard / Project API](https://supabase.com/dashboard/project/jlzykysgiuumtdcqggzg)
 
 ---
 
@@ -249,3 +249,4 @@ CREATE TABLE public.trades (
   CONSTRAINT trades_offered_game_id_fkey FOREIGN KEY (offered_game_id) REFERENCES public.games(id),
   CONSTRAINT trades_requested_game_id_fkey FOREIGN KEY (requested_game_id) REFERENCES public.games(id)
 );
+```
