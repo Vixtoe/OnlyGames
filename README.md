@@ -27,8 +27,31 @@ This was a university database course project.
 
 ## ER Diagram
 
-![ER diagram](docs/er-diagram.png)
-
+```mermaid
+erDiagram
+    profiles ||--o{ orders : places
+    profiles ||--o{ reviews : writes
+    profiles ||--o{ user_library : owns
+    profiles ||--o{ cart_items : has
+    profiles ||--o{ wishlists : saves
+    profiles ||--|| wallets : has
+    profiles ||--o{ friends : "user_id1 / user_id2"
+    profiles ||--o{ trades : "sender / receiver"
+    orders ||--o{ order_details : contains
+    games ||--o{ order_details : "ordered in"
+    games ||--o{ reviews : receives
+    games ||--o{ user_library : "owned in"
+    games ||--o{ cart_items : "added to"
+    games ||--o{ wishlists : "saved in"
+    games ||--o{ discounts : has
+    games ||--o{ system_requirements : requires
+    games ||--o{ game_tags : tagged
+    tags ||--o{ game_tags : labels
+    games ||--o{ trades : "offered / requested"
+    categories ||--o{ games : groups
+    developers ||--o{ games : develops
+    publishers ||--o{ games : publishes
+```
 ---
 
 ## Key System Features
