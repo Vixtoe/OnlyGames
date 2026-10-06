@@ -23,11 +23,6 @@ The relational schema is hosted on **Supabase** with strict foreign key cascadin
 
 ### Entity Relationship Diagram
 
-<p float="left">
-  <img src="./assets/er_diagram_overview.png" width="45%" alt="ER Diagram Overview" />
-  <img src="./assets/er_diagram_detail.png" width="52%" alt="ER Diagram Detailed View" />
-</p>
-
 * **Supabase Backend Link**: [Access Supabase Dashboard / Project API](https://supabase.com/dashboard/project/jlzykysgiuumtdcqggzg)
 
 ---
