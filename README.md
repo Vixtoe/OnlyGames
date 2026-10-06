@@ -52,6 +52,7 @@ erDiagram
     categories ||--o{ games : groups
     developers ||--o{ games : develops
     publishers ||--o{ games : publishes
+```
 ---
 
 ## Key System Features
