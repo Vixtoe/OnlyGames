@@ -1,31 +1,52 @@
 # OnlyGames
 
-> A relational database platform designed for digital game distribution, purchasing, and peer-to-peer game exchanges.
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?style=flat-square&logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Platform-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-DDL%20%2F%20DML-4479A1?style=flat-square)
+![3NF](https://img.shields.io/badge/Design-3NF%20Normalized-blue?style=flat-square)
+
+> A relational database design for digital game distribution, purchasing, and peer-to-peer game exchanges.
 
 ---
 
 ## Project Overview
 
-OnlyGames addresses flexibility limitations in current digital gaming platforms by extending traditional store functionalities—such as purchasing, reviews, and library management—with a direct peer-to-peer game exchange feature. Built on a normalized 3NF relational schema, the platform enforces data integrity, tracks dynamic game ownership transfers, and maintains distinct purchase histories.
+OnlyGames addresses flexibility limitations in current digital gaming platforms by extending traditional store functionality (purchasing, reviews, library management) with a peer-to-peer game exchange feature. The database is a normalized 3NF relational schema designed to enforce data integrity, track game ownership transfers, and keep purchase history separate from current ownership.
+
+This was a university database course project.
+
+---
+
+## My Contribution
+
+* Designed the relational schema and normalized it to 3NF, including the separation of `orders`, `user_library`, and `trades`.
+* Wrote the SQL DDL scripts, constraints, and the main analytical queries for PostgreSQL on Supabase.
+* Developed the project documentation and presentation structure.
+
+---
+
+## ER Diagram
+
+![ER diagram](docs/er-diagram.png)
 
 ---
 
 ## Key System Features
 
-* **User & Wallet Management:** Manages user profiles, authentication, roles, friends lists, and digital wallet balances.
-* **Game Catalog & Metadata:** Supports categories, developers, publishers, tags, system requirements, and dynamic discount management.
-* **Order & Transaction System:** Implements cart, wishlist, multi-item order processing, and fixed order history logging.
-* **Dynamic Library & Access Control:** Separates order logs from active game access (`UserLibrary`) to support dynamic ownership changes.
-* **Peer-to-Peer Game Exchange (Trading):** Allows users to initiate and accept game trades when developer permissions permit (`exchange_allowed`).
-* **Interaction Features:** Enables user ratings, written game reviews, and social friend connections.
+* **Users and Wallets:** Models user profiles, roles, friends lists, and wallet balances.
+* **Game Catalog and Metadata:** Supports categories, developers, publishers, tags, system requirements, and discounts.
+* **Orders and Transactions:** Models carts, wishlists, multi-item orders, and fixed order history.
+* **Library and Access Control:** Separates order records from active ownership (`user_library`) so ownership can change over time.
+* **Peer-to-Peer Game Exchange:** Models trade requests between users, allowed only when a game's `exchange_allowed` flag permits it.
+* **Interaction:** Supports ratings, written reviews, and friend connections.
 
 ---
 
-## Database Architecture & Relational Schema
+## Database Architecture and Relational Schema
 
-The database is built on **PostgreSQL via Supabase** and strictly adheres to Third Normal Form (**3NF**) to eliminate data redundancy and prevent update anomalies.
+The database runs on **PostgreSQL via Supabase** and follows Third Normal Form (3NF) to reduce redundancy and prevent update anomalies.
 
-### Core Relational Entities & Keys
+### Core Entities and Keys
 
 * `profiles` (`id` PK, `username`, `email`, `role`)
 * `games` (`id` PK, `title`, `genre`, `price`, `category_id` FK, `developer_id` FK, `publisher_id` FK, `exchange_allowed`)
@@ -48,48 +69,49 @@ The database is built on **PostgreSQL via Supabase** and strictly adheres to Thi
 
 ---
 
-## Architectural & Design Decisions
+## Design Decisions
 
-* **Order vs. Library Separation:** Disconnects `orders` from `user_library` to decouple lifetime purchasing records from current game ownership, enabling dynamic trades.
-* **Developer Exchange Control:** Includes an `exchange_allowed` boolean flag on game entities to ensure publishers maintain policy control over game trades.
-* **Bridge Tables for Many-to-Many Relationships:** Employs `game_tags` and `order_details` bridge tables to maintain strict normalization and handle complex multi-item transactions.
-* **Integrity Constraints:** Uses explicit PostgreSQL foreign keys, `NOT NULL`, `UNIQUE`, and `CHECK` constraints to safeguard transactional consistency.
-
----
-
-## Example SQL Queries Implemented
-
-* **Catalog Lookup:** Joining `games` and `categories` for detailed storefront rendering.
-* **User Purchase History:** Querying historical orders and individual purchased items per profile.
-* **Spending Analytics:** Aggregating total user expenditures via `SUM()` functions.
-* **Popularity Metrics:** Identifying top-performing titles using `COUNT()` aggregations over orders.
-* **Trade Management:** Filtering pending peer-to-peer exchange requests between active users.
+* **Order vs. Library separation:** `orders` keep the permanent purchase record, while `user_library` holds current ownership, which allows trades without rewriting history.
+* **Developer exchange control:** An `exchange_allowed` flag on each game lets publishers control whether it can be traded.
+* **Bridge tables:** `game_tags` and `order_details` handle many-to-many relationships and multi-item orders.
+* **Price snapshot:** `order_details.unit_price` stores the price at purchase time so later price changes or discounts do not alter history.
+* **Integrity constraints:** Foreign keys with `NOT NULL`, `UNIQUE`, and `CHECK` constraints [confirm each type in schema.sql].
 
 ---
 
-## Tech Stack & Tools
+## Example SQL Queries
 
-* **Database Engine:** PostgreSQL
-* **Database Platform:** Supabase
-* **Language & Syntax:** SQL (DDL, DML, Relational Constraints)
-* **Design Methodology:** Entity-Relationship (ER) Modeling, 3NF Database Normalization
+```sql
+-- Total spending per user
+[PASTE a real query from sql/queries.sql, e.g. SUM over orders grouped by user]
 
----
+-- Top-selling games
+[PASTE a real COUNT query]
+```
 
-## Team & Individual Contributions
-
-* **Academic Course:** CN392 / Database Systems at Thammasat School of Engineering
-* **Team Members:** [Member Name 1], [Member Name 2], Chanoudom Tann (Victor), [Member Name 4]
-* **My Individual Role & Contributions:**
-  * Designed and normalized the relational database schema to 3NF (`UserLibrary`, `Trades`, and `Orders` separation).
-  * Authored SQL DDL scripts, constraints, and key analytical queries on Supabase/PostgreSQL.
-  * Developed documentation and presentation structure.
+Other queries in `sql/queries.sql`: catalog lookup (games joined with categories), user purchase history, and pending trade requests between users.
 
 ---
 
-## Documentation & Resources
+## Tech Stack
 
-* **Presentation Deck:** [View Slides (PDF)](OnlyGames.pdf)
+* **Database:** PostgreSQL on Supabase
+* **Language:** SQL (DDL, DML, constraints)
+* **Design:** ER modeling, 3NF normalization
+
+---
+
+## Run the Schema
+
+1. Create a free Supabase project.
+2. Open the SQL Editor and run `sql/schema.sql`.
+3. Run the queries in `sql/queries.sql` (add sample data first if the file does not include inserts).
+
+---
+
+## Documentation
+
+* **Presentation:** [View slides (PDF)](docs/presentation.pdf) [confirm path and remove any slide showing student IDs]
 
 ---
 
@@ -97,11 +119,12 @@ The database is built on **PostgreSQL via Supabase** and strictly adheres to Thi
 
 ```text
 onlygames/
-├── docs/
-│   ├── er-diagram.png
-│   ├── relational-schema.png
-│   └── presentation.pdf
-├── sql/
-│   ├── schema.sql
-│   └── queries.sql
-└── README.md
+|-- docs/
+|   |-- er-diagram.png
+|   |-- relational-schema.png
+|   `-- presentation.pdf
+|-- sql/
+|   |-- schema.sql
+|   `-- queries.sql
+`-- README.md
+```
