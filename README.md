@@ -232,8 +232,6 @@ CREATE TABLE public.trades (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   sender_id uuid,
   receiver_id uuid,
-  offered_game text,
-  requested_game text,
   status text DEFAULT 'pending'::text,
   created_at timestamp without time zone DEFAULT now(),
   offered_game_id uuid,
